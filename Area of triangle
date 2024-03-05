@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+double calculateArea(double side1, double side2, double side3) {
+    // Calculate semi-perimeter
+    double s = (side1 + side2 + side3) / 2;
+
+    // Calculate area using Heron's formula
+    double area = sqrt(s * (s - side1) * (s - side2) * (s - side3));
+
+    return area;
+}
+
+int main() {
+    double side1, side2, side3;
+
+    // Input sides of the triangle
+    cout << "Enter length of first side: ";
+    cin >> side1;
+    cout << "Enter length of second side: ";
+    cin >> side2;
+    cout << "Enter length of third side: ";
+    cin >> side3;
+
+    // Check if the sides form a valid triangle
+    if (side1 + side2 > side3 && side1 + side3 > side2 && side2 + side3 > side1) {
+        double area = calculateArea(side1, side2, side3);
+        cout << "Area of the triangle is: " << area << endl;
+    } else {
+        cout << "The given sides do not form a valid triangle." << endl;
+    }
+
+    return 0;
+}
