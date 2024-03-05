@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node(int val) : data(val), next(NULL) {}
+};
+
+void insertAtEnd(Node*& head, int val) {
+    Node* newNode = new Node(val);
+    if (head == NULL) {
+        head = newNode;
+        return;
+    }
+    Node* temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+void deleteTail(Node*& head) {
+    if (head == NULL) {
+        cout << "List is empty. Nothing to delete." << endl;
+        return;
+    }
+    if (head->next == NULL) {
+        delete head;
+        head = NULL;
+        return;
+    }
+    Node* prev = NULL;
+    Node* temp = head;
+    while (temp->next != NULL) {
+        prev = temp;
+        temp = temp->next;
+    }
+    delete temp;
+    prev->next = NULL;
+}
+
+void printList(Node* head) {
+    while (head != NULL) {
+        cout << head->data << " -> ";
+        head = head->next;
+    }
+    cout << "NULL" << endl;
+}
+
+int main() {
+    Node* head = NULL;
+
+    insertAtEnd(head, 1);
+    insertAtEnd(head, 2);
+    insertAtEnd(head, 3);
+    insertAtEnd(head, 4);
+
+    cout << "Original List:" << endl;
+    printList(head);
+
+    deleteTail(head);
+
+    cout << "List after deleting tail:" << endl;
+    printList(head);
+
+    return 0;
+}
